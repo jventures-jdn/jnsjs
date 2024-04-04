@@ -634,7 +634,6 @@ export class ENS {
     FunctionTypes['registerNameWithId']
   >('registerNameWithId', ['contracts'])
 
-
   public renewNames = this.generateWriteFunction<FunctionTypes['renewNames']>(
     'renewNames',
     ['contracts'],
