@@ -2,7 +2,7 @@ import { BigNumber } from '@ethersproject/bignumber'
 import { ENSArgs } from '..'
 import {
   BaseRegistrationParams,
-  RegistrationTuple,
+  RegistrationWithIdTuple,
   makeRegistrationData,
 } from '../utils/registerHelpers'
 import { wrappedLabelLengthCheck } from '../utils/wrapper'
@@ -31,9 +31,9 @@ export default async function (
     name,
     resolver: _resolver,
     ...params,
-  }) as RegistrationTuple
+  }) as RegistrationWithIdTuple
 
-  return controller.populateTransaction.register(...generatedParams, {
+  return controller.populateTransaction.registerWithId(...generatedParams, {
     value,
   })
 }

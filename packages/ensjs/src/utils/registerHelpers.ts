@@ -10,6 +10,7 @@ export type BaseRegistrationParams = {
   owner: string
   duration: number
   secret: string
+  id?: string
   resolverAddress?: string
   records?: RecordOptions
   reverseRecord?: boolean
@@ -39,6 +40,19 @@ export type RegistrationTuple = [
   ownerControlledFuses: number,
 ]
 
+export type RegistrationWithIdTuple = [
+  name: string,
+  owner: string,
+  duration: number,
+  secret: string,
+  resolver: string,
+  data: string[],
+  reverseRecord: boolean,
+  ownerControlledFuses: number,
+  id: string,
+]
+
+
 export const randomSecret = () => {
   const bytes = Buffer.allocUnsafe(32)
   return `0x${crypto.getRandomValues(bytes).toString('hex')}`
@@ -53,9 +67,10 @@ export const makeCommitmentData = ({
   reverseRecord,
   fuses,
   secret,
+  id
 }: CommitmentParams & {
   secret: string
-}): RegistrationTuple => {
+}): RegistrationTuple | RegistrationWithIdTuple => {
   const labelHash = labelhash(name.split('.')[0])
   const hash = namehash(name)
   const resolverAddress = resolver.address
@@ -72,28 +87,37 @@ export const makeCommitmentData = ({
 
   const data = records ? generateRecordCallArray(hash, records, resolver) : []
 
-  return [
-    labelHash,
+  const result = id ? [labelHash,
     owner,
     duration,
     secret,
     resolverAddress,
     data,
     !!reverseRecord,
-    fuseData,
-  ]
+    fuseData, id] as RegistrationWithIdTuple : [
+      labelHash,
+      owner,
+      duration,
+      secret,
+      resolverAddress,
+      data,
+      !!reverseRecord,
+      fuseData,
+    ] as RegistrationTuple
+
+  return result
 }
 
 export const makeRegistrationData = (
   params: RegistrationParams,
-): RegistrationTuple => {
+): RegistrationTuple | RegistrationWithIdTuple => {
   const commitmentData = makeCommitmentData(params)
   const label = params.name.split('.')[0]
   commitmentData[0] = label
   return commitmentData
 }
 
-export const _makeCommitment = (params: RegistrationTuple) => {
+export const _makeCommitment = (params: RegistrationTuple | RegistrationWithIdTuple) => {
   return keccak256(
     defaultAbiCoder.encode(
       [

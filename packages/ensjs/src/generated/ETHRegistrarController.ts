@@ -53,6 +53,7 @@ export interface ETHRegistrarControllerInterface extends Interface {
     'prices()': FunctionFragment
     'recoverFunds(address,address,uint256)': FunctionFragment
     'register(string,address,uint256,bytes32,address,bytes[],bool,uint16)': FunctionFragment
+    'registerWithId(string,address,uint256,bytes32,address,bytes[],bool,uint16,string)': FunctionFragment
     'renew(string,uint256)': FunctionFragment
     'renounceOwnership()': FunctionFragment
     'rentPrice(string,uint256)': FunctionFragment
@@ -77,6 +78,7 @@ export interface ETHRegistrarControllerInterface extends Interface {
       | 'prices'
       | 'recoverFunds'
       | 'register'
+      | 'registerWithId'
       | 'renew'
       | 'renounceOwnership'
       | 'rentPrice'
@@ -152,6 +154,20 @@ export interface ETHRegistrarControllerInterface extends Interface {
     ],
   ): string
   encodeFunctionData(
+    functionFragment: 'registerWithId',
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>[],
+      PromiseOrValue<boolean>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+    ],
+  ): string
+  encodeFunctionData(
     functionFragment: 'renew',
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>],
   ): string
@@ -208,6 +224,7 @@ export interface ETHRegistrarControllerInterface extends Interface {
     data: BytesLike,
   ): Result
   decodeFunctionResult(functionFragment: 'register', data: BytesLike): Result
+  decodeFunctionResult(functionFragment: 'registerWithId', data: BytesLike): Result
   decodeFunctionResult(functionFragment: 'renew', data: BytesLike): Result
   decodeFunctionResult(
     functionFragment: 'renounceOwnership',
@@ -365,6 +382,19 @@ export interface ETHRegistrarController extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> },
     ): Promise<ContractTransaction>
 
+    registerWithId(
+      name: PromiseOrValue<string>,
+      owner: PromiseOrValue<string>,
+      duration: PromiseOrValue<BigNumberish>,
+      secret: PromiseOrValue<BytesLike>,
+      resolver: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>[],
+      reverseRecord: PromiseOrValue<boolean>,
+      ownerControlledFuses: PromiseOrValue<BigNumberish>,
+      id: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> },
+    ): Promise<ContractTransaction>
+
     renew(
       name: PromiseOrValue<string>,
       duration: PromiseOrValue<BigNumberish>,
@@ -465,6 +495,19 @@ export interface ETHRegistrarController extends BaseContract {
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> },
   ): Promise<ContractTransaction>
 
+  registerWithId(
+    name: PromiseOrValue<string>,
+    owner: PromiseOrValue<string>,
+    duration: PromiseOrValue<BigNumberish>,
+    secret: PromiseOrValue<BytesLike>,
+    resolver: PromiseOrValue<string>,
+    data: PromiseOrValue<BytesLike>[],
+    reverseRecord: PromiseOrValue<boolean>,
+    ownerControlledFuses: PromiseOrValue<BigNumberish>,
+    id: PromiseOrValue<string>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> },
+  ): Promise<ContractTransaction>
+
   renew(
     name: PromiseOrValue<string>,
     duration: PromiseOrValue<BigNumberish>,
@@ -559,6 +602,19 @@ export interface ETHRegistrarController extends BaseContract {
       reverseRecord: PromiseOrValue<boolean>,
       ownerControlledFuses: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides,
+    ): Promise<void>
+
+    registerWithId(
+      name: PromiseOrValue<string>,
+      owner: PromiseOrValue<string>,
+      duration: PromiseOrValue<BigNumberish>,
+      secret: PromiseOrValue<BytesLike>,
+      resolver: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>[],
+      reverseRecord: PromiseOrValue<boolean>,
+      ownerControlledFuses: PromiseOrValue<BigNumberish>,
+      id: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> },
     ): Promise<void>
 
     renew(
@@ -695,6 +751,19 @@ export interface ETHRegistrarController extends BaseContract {
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> },
     ): Promise<BigNumber>
 
+    registerWithId(
+      name: PromiseOrValue<string>,
+      owner: PromiseOrValue<string>,
+      duration: PromiseOrValue<BigNumberish>,
+      secret: PromiseOrValue<BytesLike>,
+      resolver: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>[],
+      reverseRecord: PromiseOrValue<boolean>,
+      ownerControlledFuses: PromiseOrValue<BigNumberish>,
+      id: PromiseOrValue<string>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> },
+    ): Promise<BigNumber>
+
     renew(
       name: PromiseOrValue<string>,
       duration: PromiseOrValue<BigNumberish>,
@@ -791,6 +860,19 @@ export interface ETHRegistrarController extends BaseContract {
       data: PromiseOrValue<BytesLike>[],
       reverseRecord: PromiseOrValue<boolean>,
       ownerControlledFuses: PromiseOrValue<BigNumberish>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> },
+    ): Promise<PopulatedTransaction>
+
+    registerWithId(
+      name: PromiseOrValue<string>,
+      owner: PromiseOrValue<string>,
+      duration: PromiseOrValue<BigNumberish>,
+      secret: PromiseOrValue<BytesLike>,
+      resolver: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>[],
+      reverseRecord: PromiseOrValue<boolean>,
+      ownerControlledFuses: PromiseOrValue<BigNumberish>,
+      id: PromiseOrValue<string>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> },
     ): Promise<PopulatedTransaction>
 

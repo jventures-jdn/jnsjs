@@ -32,6 +32,7 @@ import getSubnames from '../functions/getSubnames'
 import getWrapperData from '../functions/getWrapperData'
 import importDNSSECName from '../functions/importDNSSECName'
 import registerName from '../functions/registerName'
+import registerNameWithId from '../functions/registerNameWithId'
 import {
   // eslint-disable-next-line import/no-named-default
   default as renewNames,
@@ -82,6 +83,7 @@ export default {
   getWrapperData,
   importDNSSECName,
   registerName,
+  registerNameWithId,
   renewNames,
   extendWrappedName,
   setName,
