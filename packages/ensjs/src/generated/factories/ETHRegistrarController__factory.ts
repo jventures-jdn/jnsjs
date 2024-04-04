@@ -670,6 +670,6 @@ export class ETHRegistrarController__factory {
       address,
       _abi,
       signerOrProvider
-    ) as unknown as ETHRegistrarController
+    ) as ETHRegistrarController
   }
 }
