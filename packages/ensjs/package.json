@@ -55,8 +55,8 @@
     "src/",
     "!src/tests"
   ],
-  "repository": "git@github.com:ensdomains/ensjs-v3.git",
-  "author": "TateB <yo@taytems.xyz>",
+  "repository": "git@github.com:jventures-jdn/jnsjs.git",
+  "author": "JDN",
   "license": "MIT",
   "scripts": {
     "tenv": "ens-test-env -a",
