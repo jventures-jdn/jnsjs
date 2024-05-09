@@ -478,6 +478,59 @@ const _abi = [
         type: 'string',
       },
       {
+        internalType: 'address',
+        name: 'owner',
+        type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: 'duration',
+        type: 'uint256',
+      },
+      {
+        internalType: 'bytes32',
+        name: 'secret',
+        type: 'bytes32',
+      },
+      {
+        internalType: 'address',
+        name: 'resolver',
+        type: 'address',
+      },
+      {
+        internalType: 'bytes[]',
+        name: 'data',
+        type: 'bytes[]',
+      },
+      {
+        internalType: 'bool',
+        name: 'reverseRecord',
+        type: 'bool',
+      },
+      {
+        internalType: 'uint16',
+        name: 'ownerControlledFuses',
+        type: 'uint16',
+      },
+      {
+        internalType: 'string',
+        name: 'id',
+        type: 'string',
+      },
+    ],
+    name: 'registerWithId',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'string',
+        name: 'name',
+        type: 'string',
+      },
+      {
         internalType: 'uint256',
         name: 'duration',
         type: 'uint256',
@@ -616,7 +669,7 @@ export class ETHRegistrarController__factory {
     return new Contract(
       address,
       _abi,
-      signerOrProvider,
+      signerOrProvider
     ) as ETHRegistrarController
   }
 }

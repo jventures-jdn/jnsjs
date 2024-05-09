@@ -105,7 +105,7 @@ export type RawFunctionWithBatch = {
 
 interface GeneratedRawFunction<F extends RawFunction>
   extends Function,
-    RawFunction {
+  RawFunction {
   (...args: Parameters<OmitFirstArg<F['raw']>>): ReturnType<
     OmitFirstTwoArgs<F['decode']>
   >
@@ -118,17 +118,17 @@ type CombineFunctionDeps<F> = F extends RawFunction
 
 export interface GenericGeneratedRawFunction
   extends Function,
-    RawFunctionWithBatch {}
+  RawFunctionWithBatch {}
 
 interface GeneratedBatchFunction<F extends RawFunction>
   extends Function,
-    RawFunction {
+  RawFunction {
   <I extends BatchFunctionResult<RawFunction>[]>(...args: I): Promise<
     | {
-        [N in keyof I]: I[N] extends BatchFunctionResult<infer U>
-          ? Awaited<ReturnType<U['decode']>>
-          : never
-      }
+      [N in keyof I]: I[N] extends BatchFunctionResult<infer U>
+      ? Awaited<ReturnType<U['decode']>>
+      : never
+    }
     | undefined
   >
   batch: BatchFunction<F>
@@ -629,6 +629,10 @@ export class ENS {
   public registerName = this.generateWriteFunction<
     FunctionTypes['registerName']
   >('registerName', ['contracts'])
+
+  public registerNameWithId = this.generateWriteFunction<
+    FunctionTypes['registerNameWithId']
+  >('registerNameWithId', ['contracts'])
 
   public renewNames = this.generateWriteFunction<FunctionTypes['renewNames']>(
     'renewNames',
