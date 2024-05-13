@@ -23,7 +23,7 @@ A JavaScript library for advanced front-end development.
 NFT Metadata
 The JNS Metadata Service provides NFT metadata for JNS names. It can be queried for any wrapped name, or any unwrapped .jfin 2LD.
 
-To get the metadata for a name, call this endpoint:
+To get the metadata for a name, call these endpoint:
 
 - Mainnet
 https://jns-metadata.jfinchain.com/jfin/{contractAddress}/{tokenId}
