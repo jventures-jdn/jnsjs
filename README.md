@@ -58,6 +58,8 @@ Prepare docker-compose file with the following
 
 For dockerfile, we use bookworm node to reduce the image size
 
+Additionally, the environment variables must also be manually defined on Google's Cloud Run
+
 ### Preparing image commands
 ```bash
 docker build -t [HOSTNAME]/[PROJECT_ID]/[IMAGE] .
